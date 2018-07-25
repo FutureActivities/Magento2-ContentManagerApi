@@ -15,19 +15,11 @@ This extension provides the following endpoints:
 ### Get specific content by ID
 
     GET rest/V1/acm/content/:id
-    
-You can also optionally pass in an attributes array containing the list
-of field handles, e.g.:
 
-    rest/V1/acm/content/1?attributes[]=url_key&attributes[]=my_unique_field
-    
 ### Get content type
 
     GET rest/V1/acm/content-type/:identifier
     
-You can also optionally pass in an attributes array containing the list
-of field handles.
-
 This will return the following object:
 
     {
