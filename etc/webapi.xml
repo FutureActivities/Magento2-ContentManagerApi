@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Webapi/etc/webapi.xsd">
+    <!-- Get a collection of content by the content type -->
+    <route url="/V1/acm/content-type/:identifier" method="GET">
+       <service class="FutureActivities\ContentManagerApi\Api\ContentInterface" method="getContentByType"/>
+       <resources>
+           <resource ref="anonymous"/>
+       </resources>
+    </route>
+    <route url="/V1/acm/content/:id" method="GET">
+       <service class="FutureActivities\ContentManagerApi\Api\ContentInterface" method="getContentById"/>
+       <resources>
+           <resource ref="anonymous"/>
+       </resources>
+    </route>
+</routes>

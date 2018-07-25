@@ -1,0 +1,14 @@
+{
+    "name": "futureactivities/magento2-contentmanagerapi",
+    "description": "A Magento 2 module that extends the BlackBird Content Manager extension to provide REST API support.",
+    "version": "1.2.0",
+    "type": "magento2-module",
+    "require": {
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+          "FutureActivities\\ContentManagerApi\\": ""
+        }
+    }
+}
