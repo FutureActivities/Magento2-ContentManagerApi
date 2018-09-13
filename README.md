@@ -48,3 +48,8 @@ further filter the attribute type content collection:
 
     filters[0][attribute_code] = 'title';
     filters[0][value] = 'My Title'
+
+And you can sort the results by any field with:
+
+    sortBy = 'entity_id'
+    sortByDirection = 'ASC'

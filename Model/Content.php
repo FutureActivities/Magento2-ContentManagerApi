@@ -29,7 +29,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
    /**
     * {@inheritdoc}
     */
-    public function getContentByType($identifier, $filters = [], $currentPage = 1, $pageSize = 0)
+    public function getContentByType($identifier, $filters = [], $currentPage = 1, $pageSize = 0, $sortBy = 'entity_id', $sortByDirection = 'ASC')
     {
         $contentType = $this->contentTypeCollectionFactory->create()->addFieldToFilter('identifier', $identifier)->getFirstItem();
         
@@ -49,6 +49,8 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         
         if ($pageSize > 0)
             $collection->setPageSize($pageSize)->setCurPage($currentPage);
+    
+        $collection->setOrder($sortBy, $sortByDirection);
         
         $items = [];
         foreach ($collection AS $content)
