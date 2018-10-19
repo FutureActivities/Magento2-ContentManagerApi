@@ -65,4 +65,18 @@ interface ItemInterface extends CustomAttributesDataInterface
      * @return $this
      */
     public function setUrl($url);
+        
+    /**
+     * Get the current status
+     * 
+     * @return string
+     */
+    public function getStatus();
+    
+    /**
+     * Set the current status
+     * 
+     * @param string $status 
+     */
+    public function setStatus($status);
 }

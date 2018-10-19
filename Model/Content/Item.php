@@ -75,6 +75,22 @@ class Item extends \Magento\Framework\Api\AbstractSimpleObject implements \Futur
     /**
      * {@inheritdoc}
      */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getCustomAttribute($attributeCode)
     {
         return isset($this->_data[self::CUSTOM_ATTRIBUTES][$attributeCode])

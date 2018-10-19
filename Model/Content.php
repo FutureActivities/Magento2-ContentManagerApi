@@ -80,6 +80,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         $item->setType($contentType->getIdentifier());
         $item->setTitle($content->getTitle());
         $item->setUrl($content->getUrl());
+        $item->setStatus($content->getStatus());
         
         $timestamp = $this->attributeValue->create();
         $timestamp->setAttributeCode('created_timestamp');
