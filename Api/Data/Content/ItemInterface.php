@@ -77,6 +77,7 @@ interface ItemInterface extends CustomAttributesDataInterface
      * Set the current status
      * 
      * @param string $status 
+     * @return $this
      */
     public function setStatus($status);
 }
