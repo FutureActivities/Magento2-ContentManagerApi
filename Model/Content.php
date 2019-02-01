@@ -61,7 +61,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         
         $type->setCollection($items);
         
-        $this->eventManager->dispatch('acm_content_by_type', ['type' => $type]);
+        $this->eventManager->dispatch('acm_content_by_type', ['identifier' => $identifier, 'type' => $type]);
         
         return $type;
     }
@@ -74,7 +74,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         $content = $this->contentCollectionFactory->create()->addAttributeToFilter('entity_id', $id)->addAttributeToSelect('*')->getFirstItem();
         $item = $this->_generateContentItem($content->getContentType(), $content);
         
-        $this->eventManager->dispatch('acm_content_by_id', ['item' => $item]);
+        $this->eventManager->dispatch('acm_content_by_id', ['id' => $id, 'item' => $item]);
         
         return $item;
     }
