@@ -9,6 +9,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
     protected $contentItem;
     protected $contentType;
     protected $templateProcessor;
+    protected $eventManager;
     
     public function __construct(
         \Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory $contentCollectionFactory,
@@ -16,7 +17,8 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         \Magento\Framework\Api\AttributeValueFactory $attributeValue,
         \FutureActivities\ContentManagerApi\Model\Content\ItemFactory $contentItem,
         \FutureActivities\ContentManagerApi\Model\Content\TypeFactory $contentType,
-        \Magento\Cms\Model\Template\FilterProvider $templateProcessor)
+        \Magento\Cms\Model\Template\FilterProvider $templateProcessor,
+        \Magento\Framework\Event\ManagerInterface $eventManager)
     {
         $this->contentCollectionFactory = $contentCollectionFactory;
         $this->contentTypeCollectionFactory = $contentTypeCollectionFactory;
@@ -24,6 +26,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         $this->contentItem = $contentItem;
         $this->contentType = $contentType;
         $this->templateProcessor = $templateProcessor;
+        $this->eventManager = $eventManager;
     }
        
    /**
@@ -58,6 +61,8 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         
         $type->setCollection($items);
         
+        $this->eventManager->dispatch('acm_content_by_type', ['type' => $type]);
+        
         return $type;
     }
     
@@ -67,7 +72,11 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
     public function getContentById($id)
     {
         $content = $this->contentCollectionFactory->create()->addAttributeToFilter('entity_id', $id)->addAttributeToSelect('*')->getFirstItem();
-        return $this->_generateContentItem($content->getContentType(), $content);
+        $item = $this->_generateContentItem($content->getContentType(), $content);
+        
+        $this->eventManager->dispatch('acm_content_by_id', ['item' => $item]);
+        
+        return $item;
     }
     
     /**
