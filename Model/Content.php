@@ -101,13 +101,31 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
         foreach ($contentType->getCustomFieldCollection() AS $field) {
             
             $handle = $field->getIdentifier();
-            
             $value = $content->getData($handle);
-            if ($value && $field->getType() == 'image')
-                $value = $content->getImage($handle);
+
             if ($field->getType() == 'area')
                 $value = $this->templateProcessor->getPageFilter()->filter($value);
+            
+            if ($field->getType() == 'image') {
+                $value = $content->getImage($handle);
+    
+                // Check for alt tag
+                if ($alt = $content->getData($handle.'_alt')) {
+                    $altAttr = $this->attributeValue->create();
+                    $altAttr->setAttributeCode($handle.'_alt');
+                    $altAttr->setValue($alt);
+                    $itemAttributes[] = $altAttr;
+                }
                 
+                // Check for title tag
+                if ($title = $content->getData($handle.'_titl')) {
+                    $titleAttr = $this->attributeValue->create();
+                    $titleAttr->setAttributeCode($handle.'_titl');
+                    $titleAttr->setValue($title);
+                    $itemAttributes[] = $titleAttr;
+                }
+            }
+               
             $attribute = $this->attributeValue->create();
             $attribute->setAttributeCode($handle);
             $attribute->setValue($value);
