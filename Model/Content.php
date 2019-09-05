@@ -106,7 +106,7 @@ class Content implements \FutureActivities\ContentManagerApi\Api\ContentInterfac
             if ($field->getType() == 'area')
                 $value = $this->templateProcessor->getPageFilter()->filter($value);
             
-            if ($field->getType() == 'image') {
+            if ($value && $field->getType() == 'image') {
                 $value = $content->getImage($handle);
     
                 // Check for alt tag
