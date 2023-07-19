@@ -12,7 +12,7 @@ interface ContentInterface
     * @param int $currentPage
     * @param int $pageSize 0 = disabled
     * @param string $sortBy
-    * @param string $sortbyDirection
+    * @param string $sortByDirection
     * @return \FutureActivities\ContentManagerApi\Api\Data\Content\TypeInterface
     */
    public function getContentByType($identifier, $filters = [], $currentPage = 1, $pageSize = 0, $sortBy = 'entity_id', $sortByDirection = 'ASC');
